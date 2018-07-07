@@ -1,0 +1,20 @@
+{
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "html.autoClosingTags": false,
+    "editor.quickSuggestions": {
+        "other": false,
+        "comments": false,
+        "strings": false
+    },
+    "editor.parameterHints": false,
+    "editor.minimap.enabled": false,
+    "update.channel": "none",
+    "editor.autoClosingBrackets": false,
+    "editor.matchBrackets": false,
+    "editor.detectIndentation": false,
+    "editor.autoIndent": false,
+    "html.format.enable": false,
+    "editor.formatOnPaste": false,
+    "javascript.format.enable": false
+}

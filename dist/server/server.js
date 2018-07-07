@@ -5,7 +5,17 @@ const http = require("http");
 const WebSocket = require("ws");
 const httpServer = http.createServer(express());
 const webSocketServer = new WebSocket.Server({ server: httpServer });
-webSocketServer.on('connection', (socket) => {
+webSocketServer.on('connection', (socket, request) => {
+    console.log("socket.url: " + socket.url);
+    console.log("request.connection.remoteAddress: " + request.connection.remoteAddress);
+    socket.isAlive = true;
+    socket.on('close', (socket) => {
+        console.log("connection closed");
+    });
+    socket.on('pong', () => {
+        console.log("received pong");
+        socket.isAlive = true;
+    });
     socket.on('message', (message) => {
         console.log('received: %s', message);
         const broadcastRegex = /^broadcast\:/;
@@ -22,6 +32,16 @@ webSocketServer.on('connection', (socket) => {
         }
     });
 });
+setInterval(() => {
+    webSocketServer.clients.forEach((socket) => {
+        if (!socket.isAlive) {
+            console.log("terminated connection");
+            return socket.terminate();
+        }
+        socket.isAlive = false;
+        socket.ping(() => { });
+    });
+}, 10000);
 httpServer.listen(process.env.PORT || 3001, () => {
     console.log(`Server started on port ${httpServer.address().port} :)`);
 });

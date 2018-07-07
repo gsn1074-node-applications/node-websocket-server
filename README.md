@@ -4,6 +4,7 @@ This project shows how to create a websocket server using ws and node.js.
 
 ## References
 
++ https://www.npmjs.com/package/ws#how-to-detect-and-close-broken-connections
 + https://medium.com/factory-mind/websocket-node-js-express-step-by-step-using-typescript-725114ad5fe4
 
 ## Development Technologies
